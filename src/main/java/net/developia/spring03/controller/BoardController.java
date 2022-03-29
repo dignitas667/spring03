@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.log4j.Log4j;
 import net.developia.spring03.dto.BoardDTO;
@@ -51,6 +52,26 @@ public class BoardController {
 		} catch (Exception e) {
 			model.addAttribute("msg", "list 출력 에러");
 			model.addAttribute("url", "index");
+			return "result";
+		}
+	}
+	
+	@GetMapping(value = "detail")
+	public String detail(
+			@RequestParam(defaultValue = "-1") long no,
+			Model model) {
+		
+		try {
+			BoardDTO boardDTO = boardService.getDetail(no);
+			model.addAttribute("boardDTO", boardDTO);
+			return "detail";
+		} catch(RuntimeException e) { 
+			model.addAttribute("msg", e.getMessage());
+			model.addAttribute("url", "list");
+			return "result";
+		} catch (Exception e) {
+			model.addAttribute("msg", "상세보기 에러");
+			model.addAttribute("url", "list");
 			return "result";
 		}
 	}

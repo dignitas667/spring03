@@ -11,4 +11,6 @@ public interface BoardDAO {
 
 	List<BoardDTO> getBoardList() throws Exception;
 
+	BoardDTO getDetail(long no) throws Exception;
+
 }

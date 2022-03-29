@@ -37,4 +37,21 @@ public class BoardServiceImpl implements BoardService {
 			throw e;
 		}
 	}
+	
+	@Override
+	public BoardDTO getDetail(long no) throws Exception {
+		try {
+			if (no == -1) {
+				throw new RuntimeException("잘못된 접근입니다.");
+			}
+			BoardDTO boardDTO = boardDAO.getDetail(no);
+			if (boardDTO == null) {
+				throw new RuntimeException(no + "번 글이 존재하지 않습니다.");
+			}
+			return boardDTO;
+		} catch (Exception e) {
+			log.info(e.toString());
+			throw e;
+		}
+	}
 }

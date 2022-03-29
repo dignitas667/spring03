@@ -10,4 +10,6 @@ public interface BoardService {
 
 	List<BoardDTO> getBoardList() throws Exception;
 
+	BoardDTO getDetail(long no) throws Exception;
+
 }

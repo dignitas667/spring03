@@ -10,24 +10,34 @@
 </head>
 <body>
 <table border="1">
-<caption>게시물 리스트</caption>
+	<caption>게시물 상세보기</caption>
 <tr>
 	<th>번호</th>
-	<th>제목</th>
-	<th>작성자</th>
-	<th>작성일</th>
-	<th>조회수</th>
+	<td>${boardDTO.no}</td>
 </tr>
-<c:forEach items="${list}" var="dto">
 <tr>
-	<td>${dto.no}</td>
-	<td><a href="detail?no=${dto.no}">${dto.title}</a></td>
-	<td>${dto.name}</td>
-	<td><fmt:formatDate value="${dto.regdate}" type="date" /></td>
-	<td>${dto.readcount}</td>
+	<th>제목</th>
+	<td>${boardDTO.title}</td>
 </tr>
-</c:forEach>
+<tr>
+	<th>작성자</th>
+	<td>${boardDTO.name}</td>
+</tr>
+<tr>
+	<th>내용</th>
+	<td>${boardDTO.content}</td>
+</tr>
+<tr>
+	<th>작성일</th>
+	<td><fmt:formatDate value="${boardDTO.regdate}" type="both" /></td>
+</tr>
+<tr>
+	<th>조회수</th>
+	<td>${boardDTO.readcount}</td>
+</tr>
 </table><br/>
-<a href="insert">글쓰기</a>
+<a href="list">리스트</a> |
+<a href="update?no=${boardDTO.no}">수정</a> |
+<a href="delete?no=${boardDTO.no}">삭제</a>
 </body>
 </html>

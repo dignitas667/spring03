@@ -18,4 +18,18 @@
 	    board
 	ORDER BY NO DESC
 	</select>
+	
+	<select id="getDetail" parameterType="long" resultType="BoardDTO">
+	SELECT
+	    NO,
+	    title,
+	    NAME,
+	    CONTENT,
+	    regdate,
+	    readcount
+	FROM
+	    board
+	WHERE
+		no = #{no}
+	</select>
 </mapper>
