@@ -1,6 +1,10 @@
 package net.developia.spring03;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+
+import javax.validation.constraints.AssertTrue;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -9,6 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -70,5 +75,11 @@ public class MyTest {
 	@Ignore
 	public void createBoardDTO2() {
 		log.info("실행하지 않음");
+	}
+	
+	@Test
+	public void testAdd() {
+		TestCalculator tc = new TestCalculator();
+		assertEquals(tc.add(334, 333), 667);
 	}
 }
