@@ -2,5 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.developia.spring03.dao.BoardDAO">
-
+	<insert id="insertBoard" parameterType="BoardDTO">
+	INSERT INTO board(no, title, name, password, content)
+	VALUES(board_no_seq.nextval, #{title}, #{name}, #{password}, #{content})
+	</insert>
 </mapper>
