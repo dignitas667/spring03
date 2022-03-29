@@ -1,5 +1,7 @@
 package net.developia.spring03.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import lombok.extern.log4j.Log4j;
@@ -26,5 +28,13 @@ public class BoardServiceImpl implements BoardService {
 		}		
 	}
 	
-	
+	@Override
+	public List<BoardDTO> getBoardList() throws Exception {
+		try {
+			return boardDAO.getBoardList();
+		} catch (Exception e) {
+			log.info(e.toString());
+			throw e;
+		}
+	}
 }

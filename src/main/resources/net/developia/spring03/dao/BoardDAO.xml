@@ -6,4 +6,16 @@
 	INSERT INTO board(no, title, name, password, content)
 	VALUES(board_no_seq.nextval, #{title}, #{name}, #{password}, #{content})
 	</insert>
+	
+	<select id="getBoardList" resultType="BoardDTO">
+	SELECT
+	    NO,
+	    title,
+	    NAME,
+	    regdate,
+	    readcount
+	FROM
+	    board
+	ORDER BY NO DESC
+	</select>
 </mapper>

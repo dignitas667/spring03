@@ -1,5 +1,7 @@
 package net.developia.spring03.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +38,19 @@ public class BoardController {
 		} catch (Exception e) {
 			model.addAttribute("msg", "입력 에러");
 			model.addAttribute("url", "javascript:history.back();");
+			return "result";
+		}
+	}
+	
+	@GetMapping("list")
+	public String list(Model model) throws Exception {
+		try {
+			List<BoardDTO> list = boardService.getBoardList();
+			model.addAttribute("list", list);
+			return "list";
+		} catch (Exception e) {
+			model.addAttribute("msg", "list 출력 에러");
+			model.addAttribute("url", "index");
 			return "result";
 		}
 	}
