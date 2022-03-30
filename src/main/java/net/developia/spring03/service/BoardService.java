@@ -14,4 +14,6 @@ public interface BoardService {
 
 	void deleteBoard(BoardDTO boardDTO) throws Exception;
 
+	void updateBoard(BoardDTO boardDTO) throws Exception;
+
 }

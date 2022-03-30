@@ -97,5 +97,34 @@ public class BoardController {
 		return mav;
 	}
 	
+	@GetMapping("update")
+	public String update(@RequestParam long no, Model model) {
+		try {
+			BoardDTO boardDTO = boardService.getDetail(no);
+			model.addAttribute("boardDTO", boardDTO);
+			return "update";
+		} catch (Exception e) {
+			model.addAttribute("msg", "해당하는 게시물이 없거나 시스템 에러입니다.");
+			model.addAttribute("url", "list");
+			return "result";
+		}
+	}
 	
+	@PostMapping("update")
+	public String updateBoard(@ModelAttribute BoardDTO boardDTO,
+		Model model) {
+		
+		log.info(boardDTO.toString());
+		try {
+			boardService.updateBoard(boardDTO);
+			model.addAttribute("msg", boardDTO.getNo() + "번 게시물이 수정되었습니다.");
+			model.addAttribute("url", "detail?no=" + boardDTO.getNo());
+			return "result";
+		} catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			model.addAttribute("url", "javascript:history.back();");
+			return "result";
+		}
+	}
+
 }

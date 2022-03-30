@@ -69,4 +69,17 @@ public class BoardServiceImpl implements BoardService {
 			throw e;
 		}
 	}
+	
+	@Override
+	public void updateBoard(BoardDTO boardDTO) throws Exception {
+		try {
+			if(boardDAO.updateBoard(boardDTO) == 0) {
+				throw new RuntimeException(
+					"해당하는 게시물이 없거나 비밀번호가 틀립니다.");
+			}
+		} catch (Exception e) {
+			log.info(e.toString());
+			throw e;
+		}
+	}
 }

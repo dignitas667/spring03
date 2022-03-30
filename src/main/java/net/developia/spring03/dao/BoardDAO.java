@@ -17,4 +17,6 @@ public interface BoardDAO {
 
 	int deleteBoard(BoardDTO boardDTO) throws Exception;
 
+	int updateBoard(BoardDTO boardDTO) throws Exception;
+
 }
