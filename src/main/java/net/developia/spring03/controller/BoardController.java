@@ -63,7 +63,7 @@ public class BoardController {
 			
 			model.addAttribute("list", list);
 			model.addAttribute("pageCount", pageCount);
-			model.addAttribute("pg", "pg");
+			model.addAttribute("pg", pg);
 			return "list";
 		} catch (Exception e) {
 			model.addAttribute("msg", "list 출력 에러");
