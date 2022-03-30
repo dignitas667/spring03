@@ -13,4 +13,6 @@ public interface BoardDAO {
 
 	BoardDTO getDetail(long no) throws Exception;
 
+	void updateReadcount(long no) throws Exception;
+
 }

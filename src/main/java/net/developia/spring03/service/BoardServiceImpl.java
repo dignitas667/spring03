@@ -2,6 +2,7 @@ package net.developia.spring03.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.log4j.Log4j;
@@ -44,6 +45,7 @@ public class BoardServiceImpl implements BoardService {
 			if (no == -1) {
 				throw new RuntimeException("잘못된 접근입니다.");
 			}
+			boardDAO.updateReadcount(no);
 			BoardDTO boardDTO = boardDAO.getDetail(no);
 			if (boardDTO == null) {
 				throw new RuntimeException(no + "번 글이 존재하지 않습니다.");
