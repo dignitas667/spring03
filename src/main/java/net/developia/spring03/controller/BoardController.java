@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.log4j.Log4j;
 import net.developia.spring03.dto.BoardDTO;
@@ -75,4 +76,26 @@ public class BoardController {
 			return "result";
 		}
 	}
+	
+	@GetMapping("delete")
+	public String delete(@RequestParam long no, Model model) {
+		model.addAttribute("no", no);
+		return "delete";
+	}
+	
+	@PostMapping("delete")
+	public ModelAndView delete(@ModelAttribute BoardDTO boardDTO) {
+		ModelAndView mav = new ModelAndView("result");
+		try {
+			boardService.deleteBoard(boardDTO);
+			mav.addObject("msg", boardDTO.getNo() + "번 게시물이 삭제되었습니다.");
+			mav.addObject("url", "list");
+		} catch (Exception e) {
+			mav.addObject("msg", e.getMessage());
+			mav.addObject("url", "javascript:history.back();");
+		}
+		return mav;
+	}
+	
+	
 }

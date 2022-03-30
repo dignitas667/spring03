@@ -15,4 +15,6 @@ public interface BoardDAO {
 
 	void updateReadcount(long no) throws Exception;
 
+	int deleteBoard(BoardDTO boardDTO) throws Exception;
+
 }

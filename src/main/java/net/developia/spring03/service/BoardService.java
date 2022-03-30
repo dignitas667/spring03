@@ -12,4 +12,6 @@ public interface BoardService {
 
 	BoardDTO getDetail(long no) throws Exception;
 
+	void deleteBoard(BoardDTO boardDTO) throws Exception;
+
 }
