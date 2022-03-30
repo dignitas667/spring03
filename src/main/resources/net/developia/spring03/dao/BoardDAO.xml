@@ -19,6 +19,15 @@
 	ORDER BY NO DESC
 	</select>
 	
+	<select id="getBoardListPage" parameterType="long" resultType="BoardDTO">
+	SELECT B.*
+	FROM (SELECT  rownum AS rnum, A.*
+	      FROM	(SELECT no, title, name, regdate, readcount
+		         FROM   board
+	             ORDER  BY no DESC) A) B
+	WHERE rnum BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
 	<select id="getDetail" parameterType="long" resultType="BoardDTO">
 	SELECT
 	    NO,
@@ -49,4 +58,9 @@
 	       content=#{content}
 	WHERE  no=#{no} AND password=#{password}
 	</update>
+	
+	<select id="getBoardCount" resultType="long">
+	SELECT count(*) as cnt 
+	FROM   board
+	</select>
 </mapper>

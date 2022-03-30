@@ -16,4 +16,8 @@ public interface BoardService {
 
 	void updateBoard(BoardDTO boardDTO) throws Exception;
 
+	List<BoardDTO> getBoardListPage(long pg) throws Exception;
+
+	long getBoardCount() throws Exception;
+
 }

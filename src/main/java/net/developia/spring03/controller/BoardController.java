@@ -2,6 +2,7 @@ package net.developia.spring03.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,11 @@ import net.developia.spring03.service.BoardService;
 public class BoardController {
 
 	private BoardService boardService;
-
+	
+	@Value("${pageSize}")
+	private long pageSize;
+	
+	
 	public BoardController(BoardService boardService) {
 		this.boardService = boardService;
 	}
@@ -45,10 +50,20 @@ public class BoardController {
 	}
 	
 	@GetMapping("list")
-	public String list(Model model) throws Exception {
+	public String list(@RequestParam(defaultValue = "1") long pg, 
+		Model model) throws Exception {
+		
 		try {
-			List<BoardDTO> list = boardService.getBoardList();
+			long recordCount = boardService.getBoardCount();
+			long pageCount = recordCount / pageSize;
+			if (recordCount % pageSize != 0) pageCount++;
+			
+			
+			List<BoardDTO> list = boardService.getBoardListPage(pg);
+			
 			model.addAttribute("list", list);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pg", "pg");
 			return "list";
 		} catch (Exception e) {
 			model.addAttribute("msg", "list 출력 에러");

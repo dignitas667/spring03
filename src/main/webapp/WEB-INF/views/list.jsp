@@ -27,6 +27,13 @@
 	<td>${dto.readcount}</td>
 </tr>
 </c:forEach>
+<tr>
+	<td colspan="5">
+		<c:forEach begin="1" end="${pageCount}" var="p">
+			<a href="list?pg=${p}">${p}</a>
+		</c:forEach>
+	</td>
+</tr>
 </table><br/>
 <a href="insert">글쓰기</a>
 </body>

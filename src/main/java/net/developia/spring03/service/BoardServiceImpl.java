@@ -3,6 +3,7 @@ package net.developia.spring03.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.log4j.Log4j;
@@ -14,6 +15,10 @@ import net.developia.spring03.dto.BoardDTO;
 public class BoardServiceImpl implements BoardService {
 
 	private BoardDAO boardDAO;
+
+	@Value("${pageSize}")
+	private int pageSize;
+
 
 	public BoardServiceImpl(BoardDAO boardDAO) {
 		this.boardDAO = boardDAO;
@@ -77,6 +82,29 @@ public class BoardServiceImpl implements BoardService {
 				throw new RuntimeException(
 					"해당하는 게시물이 없거나 비밀번호가 틀립니다.");
 			}
+		} catch (Exception e) {
+			log.info(e.toString());
+			throw e;
+		}
+	}
+
+	@Override
+	public List<BoardDTO> getBoardListPage(long pg) throws Exception {
+		try {
+			long startNum = (pg - 1) * pageSize + 1;
+			long endNum   = pg * pageSize;
+		
+			return boardDAO.getBoardListPage(startNum, endNum);
+		} catch (Exception e) {
+			log.info(e.toString());
+			throw e;
+		}
+	}
+	
+	@Override
+	public long getBoardCount() throws Exception {
+		try {
+			return boardDAO.getBoardCount();
 		} catch (Exception e) {
 			log.info(e.toString());
 			throw e;
