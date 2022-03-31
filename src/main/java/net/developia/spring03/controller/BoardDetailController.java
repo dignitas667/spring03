@@ -37,7 +37,7 @@ public class BoardDetailController {
 		try {
 			BoardDTO boardDTO = boardService.getDetail(no);
 			model.addAttribute("boardDTO", boardDTO);
-			return "detail";
+			return "board.detail";
 		} catch(RuntimeException e) { 
 			model.addAttribute("msg", e.getMessage());
 			model.addAttribute("url", "../");
@@ -51,7 +51,7 @@ public class BoardDetailController {
 	
 	@GetMapping("delete")
 	public String delete(@PathVariable long no, Model model) {
-		return "delete";
+		return "board.delete";
 	}
 	
 	@PostMapping("delete")
@@ -74,7 +74,7 @@ public class BoardDetailController {
 		try {
 			BoardDTO boardDTO = boardService.getDetail(no);
 			model.addAttribute("boardDTO", boardDTO);
-			return "update";
+			return "board.update";
 		} catch (Exception e) {
 			model.addAttribute("msg", "해당하는 게시물이 없거나 시스템 에러입니다.");
 			model.addAttribute("url", "../../1/");

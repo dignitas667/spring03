@@ -36,7 +36,7 @@ public class BoardController {
 	
 	@GetMapping("insert")
 	public String insertBoard() {
-		return "insert";
+		return "board.insert";
 	}	
 	
 	@PostMapping("insert")
@@ -74,7 +74,7 @@ public class BoardController {
 			model.addAttribute("pg", pg);
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
-			return "list";
+			return "board.list.blue";
 		} catch (Exception e) {
 			model.addAttribute("msg", "list 출력 에러");
 			model.addAttribute("url", "index");
