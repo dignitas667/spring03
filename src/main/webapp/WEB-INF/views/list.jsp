@@ -24,7 +24,7 @@
 <c:forEach items="${list}" var="dto">
 <tr>
 	<td>${dto.no}</td>
-	<td><a href="detail?no=${dto.no}&pg=${pg}">${dto.title}</a></td>
+	<td><a href="${dto.no}/">${dto.title}</a></td>
 	<td>${dto.name}</td>
 	<td><fmt:formatDate value="${dto.regdate}" type="date" /></td>
 	<td>${dto.readcount}</td>
@@ -33,16 +33,16 @@
 <tr>
 	<td colspan="5">
 		<c:if test="${startPage != 1}">
-			[<a href="list?pg=${startPage - 1}">이전블럭</a>]
+			[<a href="../${startPage - 1}/">이전블럭</a>]
 		</c:if>
 		
 		<c:forEach begin="${startPage}" end="${endPage}" var="p">
 			<c:if test="${p == pg}">${p}</c:if>
-			<c:if test="${p != pg}"><a href="list?pg=${p}">${p}</a></c:if>
+			<c:if test="${p != pg}"><a href="../${p}/">${p}</a></c:if>
 		</c:forEach>
 		
 		<c:if test="${endPage != pageCount}">
-			[<a href="list?pg=${endPage + 1}">다음블럭</a>]
+			[<a href="../${endPage + 1}/">다음블럭</a>]
 		</c:if>
 	</td>
 </tr>

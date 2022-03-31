@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +19,7 @@ import net.developia.spring03.service.BoardService;
 
 @Log4j
 @Controller
+@RequestMapping("board/{pg}")
 public class BoardController {
 
 	private BoardService boardService;
@@ -43,7 +46,7 @@ public class BoardController {
 		log.info(boardDTO.toString());
 		try {
 			boardService.insertBoard(boardDTO);
-			return "redirect:list";
+			return "redirect:../1/";
 		} catch (Exception e) {
 			model.addAttribute("msg", "입력 에러");
 			model.addAttribute("url", "javascript:history.back();");
@@ -51,8 +54,8 @@ public class BoardController {
 		}
 	}
 	
-	@GetMapping("list")
-	public String list(@RequestParam(defaultValue = "1") long pg, 
+	@GetMapping("/")
+	public String list(@PathVariable long pg, 
 		Model model) throws Exception {
 		
 		try {
@@ -78,77 +81,4 @@ public class BoardController {
 			return "result";
 		}
 	}
-	
-	@GetMapping(value = "detail")
-	public String detail(
-			@RequestParam(defaultValue = "-1") long no,
-			@RequestParam(defaultValue = "1") long pg,
-			Model model) {
-		
-		try {
-			BoardDTO boardDTO = boardService.getDetail(no);
-			model.addAttribute("boardDTO", boardDTO);
-			model.addAttribute("pg", pg);
-			return "detail";
-		} catch(RuntimeException e) { 
-			model.addAttribute("msg", e.getMessage());
-			model.addAttribute("url", "list");
-			return "result";
-		} catch (Exception e) {
-			model.addAttribute("msg", "상세보기 에러");
-			model.addAttribute("url", "list");
-			return "result";
-		}
-	}
-	
-	@GetMapping("delete")
-	public String delete(@RequestParam long no, Model model) {
-		model.addAttribute("no", no);
-		return "delete";
-	}
-	
-	@PostMapping("delete")
-	public ModelAndView delete(@ModelAttribute BoardDTO boardDTO) {
-		ModelAndView mav = new ModelAndView("result");
-		try {
-			boardService.deleteBoard(boardDTO);
-			mav.addObject("msg", boardDTO.getNo() + "번 게시물이 삭제되었습니다.");
-			mav.addObject("url", "list");
-		} catch (Exception e) {
-			mav.addObject("msg", e.getMessage());
-			mav.addObject("url", "javascript:history.back();");
-		}
-		return mav;
-	}
-	
-	@GetMapping("update")
-	public String update(@RequestParam long no, Model model) {
-		try {
-			BoardDTO boardDTO = boardService.getDetail(no);
-			model.addAttribute("boardDTO", boardDTO);
-			return "update";
-		} catch (Exception e) {
-			model.addAttribute("msg", "해당하는 게시물이 없거나 시스템 에러입니다.");
-			model.addAttribute("url", "list");
-			return "result";
-		}
-	}
-	
-	@PostMapping("update")
-	public String updateBoard(@ModelAttribute BoardDTO boardDTO,
-		Model model) {
-		
-		log.info(boardDTO.toString());
-		try {
-			boardService.updateBoard(boardDTO);
-			model.addAttribute("msg", boardDTO.getNo() + "번 게시물이 수정되었습니다.");
-			model.addAttribute("url", "detail?no=" + boardDTO.getNo());
-			return "result";
-		} catch (Exception e) {
-			model.addAttribute("msg", e.getMessage());
-			model.addAttribute("url", "javascript:history.back();");
-			return "result";
-		}
-	}
-
 }

@@ -36,8 +36,8 @@
 	<td>${boardDTO.readcount}</td>
 </tr>
 </table><br/>
-<a href="list?pg=${pg}">리스트</a> |
-<a href="update?no=${boardDTO.no}">수정</a> |
-<a href="delete?no=${boardDTO.no}">삭제</a>
+<a href="../">리스트</a> |
+<a href="update">수정</a> |
+<a href="delete">삭제</a>
 </body>
 </html>
