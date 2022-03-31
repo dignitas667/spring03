@@ -24,6 +24,8 @@ public class BoardController {
 	@Value("${pageSize}")
 	private long pageSize;
 	
+	@Value("${blockSize}")
+	private long blockSize;
 	
 	public BoardController(BoardService boardService) {
 		this.boardService = boardService;
@@ -58,12 +60,17 @@ public class BoardController {
 			long pageCount = recordCount / pageSize;
 			if (recordCount % pageSize != 0) pageCount++;
 			
-			
 			List<BoardDTO> list = boardService.getBoardListPage(pg);
+
+			long startPage = (pg - 1)/blockSize*blockSize+1;
+			long endPage   = startPage + blockSize - 1;
+			if (endPage > pageCount) endPage = pageCount;
 			
 			model.addAttribute("list", list);
 			model.addAttribute("pageCount", pageCount);
 			model.addAttribute("pg", pg);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
 			return "list";
 		} catch (Exception e) {
 			model.addAttribute("msg", "list 출력 에러");

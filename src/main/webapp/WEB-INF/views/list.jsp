@@ -29,7 +29,7 @@
 </c:forEach>
 <tr>
 	<td colspan="5">
-		<c:forEach begin="1" end="${pageCount}" var="p">
+		<c:forEach begin="${startPage}" end="${endPage}" var="p">
 			<a href="list?pg=${p}">${p}</a>
 		</c:forEach>
 	</td>
