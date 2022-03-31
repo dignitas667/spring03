@@ -70,14 +70,14 @@ public class BoardDetailController {
 	}
 	
 	@GetMapping("update")
-	public String update(@RequestParam long no, Model model) {
+	public String update(@PathVariable long no, Model model) {
 		try {
 			BoardDTO boardDTO = boardService.getDetail(no);
 			model.addAttribute("boardDTO", boardDTO);
 			return "update";
 		} catch (Exception e) {
 			model.addAttribute("msg", "해당하는 게시물이 없거나 시스템 에러입니다.");
-			model.addAttribute("url", "list");
+			model.addAttribute("url", "../../1/");
 			return "result";
 		}
 	}
@@ -90,7 +90,7 @@ public class BoardDetailController {
 		try {
 			boardService.updateBoard(boardDTO);
 			model.addAttribute("msg", boardDTO.getNo() + "번 게시물이 수정되었습니다.");
-			model.addAttribute("url", "detail?no=" + boardDTO.getNo());
+			model.addAttribute("url", "./");
 			return "result";
 		} catch (Exception e) {
 			model.addAttribute("msg", e.getMessage());
