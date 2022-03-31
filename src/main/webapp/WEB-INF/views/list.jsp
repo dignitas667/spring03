@@ -24,7 +24,7 @@
 <c:forEach items="${list}" var="dto">
 <tr>
 	<td>${dto.no}</td>
-	<td><a href="detail?no=${dto.no}">${dto.title}</a></td>
+	<td><a href="detail?no=${dto.no}&pg=${pg}">${dto.title}</a></td>
 	<td>${dto.name}</td>
 	<td><fmt:formatDate value="${dto.regdate}" type="date" /></td>
 	<td>${dto.readcount}</td>

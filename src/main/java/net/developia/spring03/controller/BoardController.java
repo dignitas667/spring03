@@ -82,11 +82,13 @@ public class BoardController {
 	@GetMapping(value = "detail")
 	public String detail(
 			@RequestParam(defaultValue = "-1") long no,
+			@RequestParam(defaultValue = "1") long pg,
 			Model model) {
 		
 		try {
 			BoardDTO boardDTO = boardService.getDetail(no);
 			model.addAttribute("boardDTO", boardDTO);
+			model.addAttribute("pg", pg);
 			return "detail";
 		} catch(RuntimeException e) { 
 			model.addAttribute("msg", e.getMessage());
