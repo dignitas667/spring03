@@ -12,6 +12,9 @@
 <table border="1">
 <caption>게시물 리스트</caption>
 <tr>
+	<td colspan="5">현재페이지:${pg} / 전체페이지수:${pageCount}</td>
+</tr>
+<tr>
 	<th>번호</th>
 	<th>제목</th>
 	<th>작성자</th>
@@ -29,9 +32,18 @@
 </c:forEach>
 <tr>
 	<td colspan="5">
+		<c:if test="${startPage != 1}">
+			[<a href="list?pg=${startPage - 1}">이전블럭</a>]
+		</c:if>
+		
 		<c:forEach begin="${startPage}" end="${endPage}" var="p">
-			<a href="list?pg=${p}">${p}</a>
+			<c:if test="${p == pg}">${p}</c:if>
+			<c:if test="${p != pg}"><a href="list?pg=${p}">${p}</a></c:if>
 		</c:forEach>
+		
+		<c:if test="${endPage != pageCount}">
+			[<a href="list?pg=${endPage + 1}">다음블럭</a>]
+		</c:if>
 	</td>
 </tr>
 </table><br/>
