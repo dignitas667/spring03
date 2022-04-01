@@ -13,7 +13,7 @@
 	<caption>게시물 상세보기</caption>
 <tr>
 	<th>번호</th>
-	<td>${boardDTO.no}</td>
+	<td>${vn}</td>
 </tr>
 <tr>
 	<th>제목</th>

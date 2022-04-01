@@ -21,10 +21,10 @@
 	<th>작성일</th>
 	<th>조회수</th>
 </tr>
-<c:forEach items="${list}" var="dto">
+<c:forEach items="${list}" var="dto" varStatus="vs">
 <tr>
-	<td>${dto.no}</td>
-	<td><a href="${dto.no}/">${dto.title}</a></td>
+	<td>${recordCount - vs.index - ((pg-1)*pageSize)}</td>
+	<td><a href="${dto.no}/?vn=${recordCount - vs.index - ((pg-1)*pageSize)}">${dto.title}</a></td>
 	<td>${dto.name}</td>
 	<td><fmt:formatDate value="${dto.regdate}" type="date" /></td>
 	<td>${dto.readcount}</td>

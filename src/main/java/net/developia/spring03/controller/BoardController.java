@@ -74,7 +74,9 @@ public class BoardController {
 			model.addAttribute("pg", pg);
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("endPage", endPage);
-			return "board.list.blue";
+			model.addAttribute("recordCount", recordCount);
+			model.addAttribute("pageSize", pageSize);
+			return "board.list";
 		} catch (Exception e) {
 			model.addAttribute("msg", "list 출력 에러");
 			model.addAttribute("url", "index");

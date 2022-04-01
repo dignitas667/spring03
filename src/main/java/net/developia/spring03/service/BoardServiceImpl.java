@@ -26,88 +26,53 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void insertBoard(BoardDTO boardDTO) throws Exception {
-		try {
-			boardDAO.insertBoard(boardDTO);
-		} catch (Exception e) {
-			log.info(e.toString());
-			throw e;
-		}		
+		boardDAO.insertBoard(boardDTO);
 	}
 	
 	@Override
 	public List<BoardDTO> getBoardList() throws Exception {
-		try {
-			return boardDAO.getBoardList();
-		} catch (Exception e) {
-			log.info(e.toString());
-			throw e;
-		}
+		return boardDAO.getBoardList();
 	}
 	
 	@Override
 	public BoardDTO getDetail(long no) throws Exception {
-		try {
-			if (no == -1) {
-				throw new RuntimeException("잘못된 접근입니다.");
-			}
-			boardDAO.updateReadcount(no);
-			BoardDTO boardDTO = boardDAO.getDetail(no);
-			if (boardDTO == null) {
-				throw new RuntimeException(no + "번 글이 존재하지 않습니다.");
-			}
-			return boardDTO;
-		} catch (Exception e) {
-			log.info(e.toString());
-			throw e;
+		if (no == -1) {
+			throw new RuntimeException("잘못된 접근입니다.");
 		}
+		boardDAO.updateReadcount(no);
+		BoardDTO boardDTO = boardDAO.getDetail(no);
+		if (boardDTO == null) {
+			throw new RuntimeException(no + "번 글이 존재하지 않습니다.");
+		}
+		return boardDTO;
 	}
 	
 	@Override
 	public void deleteBoard(BoardDTO boardDTO) throws Exception {
-		try {
-			if(boardDAO.deleteBoard(boardDTO) == 0) {
-				throw new RuntimeException(
-					"해당하는 게시물이 없거나 비밀번호가 틀립니다.");
-			}
-		} catch (Exception e) {
-			log.info(e.toString());
-			throw e;
+		if(boardDAO.deleteBoard(boardDTO) == 0) {
+			throw new RuntimeException(
+				"해당하는 게시물이 없거나 비밀번호가 틀립니다.");
 		}
 	}
 	
 	@Override
 	public void updateBoard(BoardDTO boardDTO) throws Exception {
-		try {
-			if(boardDAO.updateBoard(boardDTO) == 0) {
-				throw new RuntimeException(
-					"해당하는 게시물이 없거나 비밀번호가 틀립니다.");
-			}
-		} catch (Exception e) {
-			log.info(e.toString());
-			throw e;
+		if(boardDAO.updateBoard(boardDTO) == 0) {
+			throw new RuntimeException(
+				"해당하는 게시물이 없거나 비밀번호가 틀립니다.");
 		}
 	}
 
 	@Override
 	public List<BoardDTO> getBoardListPage(long pg) throws Exception {
-		try {
-			long startNum = (pg - 1) * pageSize + 1;
-			long endNum   = pg * pageSize;
-		
-			return boardDAO.getBoardListPage(startNum, endNum);
-		} catch (Exception e) {
-			log.info(e.toString());
-			throw e;
-		}
+		long startNum = (pg - 1) * pageSize + 1;
+		long endNum   = pg * pageSize;
+	
+		return boardDAO.getBoardListPage(startNum, endNum);
 	}
 	
 	@Override
 	public long getBoardCount() throws Exception {
-		try {
-			return boardDAO.getBoardCount();
-		} catch (Exception e) {
-			log.info(e.toString());
-			throw e;
-		}
+		return boardDAO.getBoardCount();
 	}
 }

@@ -32,11 +32,13 @@ public class BoardDetailController {
 	public String detail(
 			@PathVariable long pg,
 			@PathVariable long no,
+			@RequestParam long vn, // virtual number
 			Model model) {
 		
 		try {
 			BoardDTO boardDTO = boardService.getDetail(no);
 			model.addAttribute("boardDTO", boardDTO);
+			model.addAttribute("vn", vn);
 			return "board.detail";
 		} catch(RuntimeException e) { 
 			model.addAttribute("msg", e.getMessage());
