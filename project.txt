@@ -1,3 +1,4 @@
+action..
 
 list   : http://localhost/spring03/board/{pg}/
 insert : http://localhost/spring03/board/{pg}/insert       (GET)
